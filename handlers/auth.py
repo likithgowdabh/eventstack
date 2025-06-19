@@ -6,6 +6,7 @@ import os
 from models.db import get_db_connection, create_user, get_user_by_github_id
 from dotenv import load_dotenv
 load_dotenv()
+
 class LoginHandler(tornado.web.RequestHandler):
     def get(self):
         user_cookie = self.get_secure_cookie("user")
@@ -26,11 +27,8 @@ class GitHubAuthHandler(tornado.web.RequestHandler):
         if not code:
             # Redirect to GitHub OAuth
             github_client_id = os.getenv("GITHUB_CLIENT_ID", "")
-            # Use the current domain for the callback
-            if "replit.dev" in self.request.host:
-                redirect_uri = f"https://{self.request.host}/complete/github/"
-            else:
-                redirect_uri = f"{self.request.protocol}://{self.request.host}/complete/github/"
+            # Use the callback URL from environment variable
+            redirect_uri = os.getenv("GITHUB_CALLBACK_URL", f"{self.request.protocol}://{self.request.host}/complete/github/")
             github_url = f"https://github.com/login/oauth/authorize?client_id={github_client_id}&redirect_uri={redirect_uri}&scope=user:email"
             self.redirect(github_url)
         else:
@@ -40,11 +38,8 @@ class GitHubAuthHandler(tornado.web.RequestHandler):
     def exchange_code_for_token(self, code):
         client_id = os.getenv("GITHUB_CLIENT_ID", "")
         client_secret = os.getenv("GITHUB_CLIENT_SECRET", "")
-        # Use the same redirect_uri as in the OAuth request
-        if "replit.dev" in self.request.host:
-            redirect_uri = f"https://{self.request.host}/complete/github/"
-        else:
-            redirect_uri = f"{self.request.protocol}://{self.request.host}/complete/github/"
+        # Use the callback URL from environment variable
+        redirect_uri = os.getenv("GITHUB_CALLBACK_URL", f"{self.request.protocol}://{self.request.host}/complete/github/")
         
         # Exchange code for access token
         token_url = "https://github.com/login/oauth/access_token"
