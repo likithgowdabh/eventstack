@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-center">
+    <!-- Hero Section -->
+    <div class="max-w-4xl mx-auto">
+        <div class="mb-12">
+            <!-- Large starburst hero logo -->
+            <img src="/static/images/image 2.png" alt="EventStack Hero Starburst" width="357" height="149" class="mx-auto mb-6" />
+            <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight mt-6" style="margin-top: 50px; margin-bottom: 50px;">
+                Schedule Smarter,<br>
+                <span class="text-gray-900" style="margin-top: 20px;">Vote Faster</span>
+            </h1>
+            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+                Create events, propose time slots, and let participants vote for their preferred times. 
+                Real-time updates keep everyone in sync.
+            </p>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="grid md:grid-cols-3 gap-8 mb-16">
+            <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <div class="w-16 h-16 mx-auto mb-4 bg-eventstack-bg rounded-full flex items-center justify-center">
+                    <i class="fab fa-github text-3xl text-gray-900"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3 text-gray-900">GitHub Integration</h3>
+                <p class="text-gray-600 leading-relaxed">Sign in with your GitHub account. No new passwords to remember.</p>
+            </div>
+            
+            <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <div class="w-16 h-16 mx-auto mb-4 bg-eventstack-bg rounded-full flex items-center justify-center">
+                    <i class="fas fa-vote-yea text-3xl text-gray-900"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3 text-gray-900">Real-time Voting</h3>
+                <p class="text-gray-600 leading-relaxed">See votes update instantly as participants make their choices.</p>
+            </div>
+            
+            <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <div class="w-16 h-16 mx-auto mb-4 bg-eventstack-bg rounded-full flex items-center justify-center">
+                    <i class="fas fa-mobile-alt text-3xl text-gray-900"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3 text-gray-900">Mobile Friendly</h3>
+                <p class="text-gray-600 leading-relaxed">Fully responsive design works perfectly on all devices.</p>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Ready to get started?</h2>
+            <p class="text-gray-600 mb-8 text-lg">Sign in with GitHub to create your first event.</p>
+            <a href="/login" class="inline-flex items-center bg-gray-900 text-white px-8 py-4 rounded-xl hover:bg-gray-800 transition-all duration-200 text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105">
+                <i class="fab fa-github mr-3 text-xl"></i>
+                Sign in with GitHub
+            </a>
+        </div>
+    </div>
+</div>
+{% end %}

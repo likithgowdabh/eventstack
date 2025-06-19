@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+
+{% block title %}{{ event['title'] }} - EventStack{% end %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <!-- Event Header -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <div class="flex items-start justify-between mb-4">
+            <div class="flex-1">
+                <h1 class="text-2xl font-bold text-gray-900 mb-2">{{ event['title'] }}</h1>
+                {% if event['description'] %}
+                <p class="text-gray-600 mb-3">{{ event['description'] }}</p>
+                {% end %}
+                {% if event['location'] %}
+                <p class="text-sm text-gray-500">
+                    <i class="fas fa-map-marker-alt mr-1"></i>{{ event['location'] }}
+                </p>
+                {% end %}
+            </div>
+            
+            {% if event['is_finalized'] %}
+            <span class="bg-gray-800 text-white px-3 py-1 rounded-full text-sm">
+                <i class="fas fa-check mr-1"></i>Finalized
+            </span>
+            {% end %}
+        </div>
+        
+        <div class="flex items-center text-sm text-gray-500">
+            <img src="{{ event['creator_avatar'] }}" alt="{{ event['creator_username'] }}" class="w-6 h-6 rounded-full mr-2">
+            <span>Created by {{ event['creator_username'] }}</span>
+            <span class="mx-2">•</span>
+            <span>{{ event['created_at'].strftime('%Y-%m-%d %H:%M:%S') if hasattr(event['created_at'], 'strftime') else str(event['created_at'])[:19] }}</span>
+        </div>
+    </div>
+
+    <!-- Time Slots Voting -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <h2 class="text-xl font-semibold text-gray-900 mb-4">
+            <i class="fas fa-vote-yea mr-2"></i>Vote for Your Preferred Times
+        </h2>
+        
+        {% if not event['is_finalized'] %}
+            {% if user %}
+                <p class="text-gray-600 mb-4">Click on the time slots you can attend. Your votes will update in real-time.</p>
+            {% else %}
+                <p class="text-gray-600 mb-4">
+                    <a href="/login" class="text-gray-800 hover:underline">Sign in</a> to vote on time slots.
+                </p>
+            {% end %}
+        {% else %}
+            <p class="text-gray-800 mb-4">
+                <i class="fas fa-check mr-1"></i>This event has been finalized.
+            </p>
+        {% end %}
+
+        <div class="space-y-3" id="timeSlotsContainer">
+            {% for slot in time_slots %}
+            <div class="border rounded-lg p-4 time-slot {% if event['finalized_slot_id'] == slot['id'] %}border-gray-800 bg-gray-100{% else %}hover:bg-gray-50{% end %}" 
+                 data-slot-id="{{ slot['id'] }}">
+                <div class="flex items-center justify-between">
+                    <div class="flex-1">
+                        <div class="font-medium text-gray-900">
+                            {{ slot['slot_datetime'].strftime('%Y-%m-%d at %H:%M') if hasattr(slot['slot_datetime'], 'strftime') else str(slot['slot_datetime']).replace('T', ' at ') }}
+                        </div>
+                        {% if event['finalized_slot_id'] == slot['id'] %}
+                        <div class="text-sm text-gray-800 mt-1">
+                            <i class="fas fa-star mr-1"></i>Final Selection
+                        </div>
+                        {% end %}
+                    </div>
+                    
+                    <div class="flex items-center space-x-4">
+                        <!-- Vote count and avatars -->
+                        <div class="flex items-center space-x-2">
+                            <div class="flex -space-x-1" id="voters-{{ slot['id'] }}">
+                                {% if slot['id'] in votes_by_slot %}
+                                    {% for vote in votes_by_slot[slot['id']] %}
+                                    <img src="{{ vote['avatar_url'] }}" 
+                                         alt="{{ vote['username'] }}" 
+                                         title="{{ vote['username'] }}"
+                                         class="w-6 h-6 rounded-full border-2 border-white">
+                                    {% end %}
+                                {% end %}
+                            </div>
+                            <span class="text-sm text-gray-600" id="count-{{ slot['id'] }}">
+                                {% if slot['id'] in votes_by_slot %}{{ len(votes_by_slot[slot['id']]) }}{% else %}0{% end %} votes
+                            </span>
+                        </div>
+                        
+                        <!-- Vote button -->
+                        {% if user and not event['is_finalized'] %}
+                        <button onclick="toggleVote({{ slot['id'] }})" 
+                                class="vote-btn px-4 py-2 rounded-md transition-colors {% if slot['id'] in user_votes %}bg-gray-800 text-white{% else %}bg-gray-100 text-gray-700 hover:bg-gray-200{% end %}"
+                                id="vote-btn-{{ slot['id'] }}">
+                            {% if slot['id'] in user_votes %}
+                                <i class="fas fa-check mr-1"></i>Voted
+                            {% else %}
+                                <i class="fas fa-plus mr-1"></i>Vote
+                            {% end %}
+                        </button>
+                        {% end %}
+                        
+                        <!-- Finalize button (only for creator) -->
+                        {% if user and user['id'] == event['created_by'] and not event['is_finalized'] %}
+                        <form method="post" class="inline">
+                            <input type="hidden" name="action" value="finalize">
+                            <input type="hidden" name="slot_id" value="{{ slot['id'] }}">
+                            <button type="submit" 
+                                    class="bg-gray-800 text-white px-3 py-2 rounded-md hover:bg-gray-900 transition-colors text-sm"
+                                    onclick="return confirm('Are you sure you want to finalize this time slot?')">
+                                <i class="fas fa-star mr-1"></i>Finalize
+                            </button>
+                        </form>
+                        {% end %}
+                    </div>
+                </div>
+            </div>
+            {% end %}
+        </div>
+    </div>
+
+    <!-- Comments Section -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold text-gray-900 mb-4">
+            <i class="fas fa-comments mr-2"></i>Comments
+        </h2>
+        
+        <!-- Add Comment Form -->
+        {% if user %}
+        <form method="post" class="mb-6">
+            <input type="hidden" name="action" value="comment">
+            <div class="flex space-x-3">
+                <img src="{{ user['avatar_url'] }}" alt="{{ user['username'] }}" class="w-8 h-8 rounded-full flex-shrink-0">
+                <div class="flex-1">
+                    <textarea name="comment" 
+                              rows="3" 
+                              placeholder="Add a comment..."
+                              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800 focus:border-transparent"></textarea>
+                    <button type="submit" 
+                            class="mt-2 bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-900 transition-colors">
+                        <i class="fas fa-paper-plane mr-1"></i>Comment
+                    </button>
+                </div>
+            </div>
+        </form>
+        {% end %}
+        
+        <!-- Comments List -->
+        <div class="space-y-4">
+            {% if comments %}
+                {% for comment in comments %}
+                <div class="flex space-x-3">
+                    <img src="{{ comment['avatar_url'] }}" alt="{{ comment['username'] }}" class="w-8 h-8 rounded-full flex-shrink-0">
+                    <div class="flex-1">
+                        <div class="bg-gray-100 rounded-lg p-3">
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="font-medium text-sm">{{ comment['username'] }}</span>
+                                <span class="text-xs text-gray-500">{{ comment['created_at'].strftime('%Y-%m-%d %H:%M:%S') if hasattr(comment['created_at'], 'strftime') else str(comment['created_at'])[:19] }}</span>
+                            </div>
+                            <p class="text-gray-700">{{ comment['comment_text'] }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% end %}
+            {% else %}
+                <p class="text-gray-500 text-center py-4">No comments yet. Be the first to comment!</p>
+            {% end %}
+        </div>
+    </div>
+</div>
+
+<script src="/static/js/websocket.js"></script>
+<script>
+// Initialize WebSocket for real-time updates
+const eventId = '{{ event["id"] }}';
+initWebSocket(eventId);
+
+// Vote toggle function
+async function toggleVote(slotId) {
+    const btn = document.getElementById(`vote-btn-${slotId}`);
+    const isVoted = btn.classList.contains('bg-gray-800');
+    
+    try {
+        const response = await fetch('/api/vote', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `event_id=${eventId}&slot_id=${slotId}&action=${isVoted ? 'unvote' : 'vote'}`
+        });
+        
+        const result = await response.json();
+        if (!result.success) {
+            alert('Failed to update vote. Please try again.');
+        }
+    } catch (error) {
+        console.error('Error voting:', error);
+        alert('Failed to update vote. Please try again.');
+    }
+}
+</script>
+{% end %}

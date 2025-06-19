@@ -1,0 +1,247 @@
+/* Custom styles for EventStack */
+
+/* Smooth transitions for interactive elements */
+* {
+    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* GitHub-inspired button styles */
+.btn-github {
+    @apply bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-800 transition-colors;
+}
+
+.btn-github-green {
+    @apply bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors;
+}
+
+.btn-github-blue {
+    @apply bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors;
+}
+
+/* Vote button animations */
+.vote-btn {
+    transition: all 0.2s ease;
+}
+
+.vote-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.vote-btn:active {
+    transform: translateY(0);
+}
+
+/* Time slot hover effects */
+.time-slot {
+    transition: all 0.2s ease;
+}
+
+.time-slot:hover {
+    border-color: #e5e7eb;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Avatar stack improvements */
+.avatar-stack img {
+    transition: transform 0.2s ease;
+}
+
+.avatar-stack:hover img {
+    transform: translateX(2px);
+}
+
+/* Form enhancements */
+.form-input {
+    @apply w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent;
+}
+
+.form-textarea {
+    @apply w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent resize-y;
+}
+
+/* Loading states */
+.loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Connection status indicator */
+#connection-status {
+    animation: slideInRight 0.3s ease;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Notification animations */
+.notification {
+    animation: slideInDown 0.3s ease;
+}
+
+@keyframes slideInDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Card hover effects */
+.card {
+    transition: all 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Event finalized state */
+.event-finalized {
+    background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
+    border-color: #48bb78;
+}
+
+/* Mobile responsive improvements */
+@media (max-width: 640px) {
+    .mobile-hidden {
+        display: none;
+    }
+    
+    .mobile-stack {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .mobile-stack > * {
+        margin-bottom: 0.5rem;
+    }
+    
+    .mobile-stack > *:last-child {
+        margin-bottom: 0;
+    }
+}
+
+/* Time slot selection improvements */
+input[type="datetime-local"] {
+    @apply form-input;
+    min-height: 2.5rem;
+}
+
+/* Comment threading styles */
+.comment-thread {
+    border-left: 2px solid #e5e7eb;
+    margin-left: 1rem;
+    padding-left: 1rem;
+}
+
+/* Vote count animation */
+.vote-count {
+    transition: all 0.3s ease;
+}
+
+.vote-count.updated {
+    animation: pulse 0.6s ease;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Avatar tooltip styling */
+.avatar-tooltip {
+    position: absolute;
+    z-index: 1000;
+    padding: 0.25rem 0.5rem;
+    background-color: #1f2937;
+    color: white;
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.avatar-tooltip.show {
+    opacity: 1;
+}
+
+/* Dark mode support (if needed) */
+@media (prefers-color-scheme: dark) {
+    .dark-mode-toggle {
+        display: block;
+    }
+}
+
+/* Print styles */
+@media print {
+    .no-print {
+        display: none;
+    }
+    
+    .print-friendly {
+        background: white !important;
+        color: black !important;
+    }
+}
+
+/* Focus management for accessibility */
+.focus-visible:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Skeleton loading for better perceived performance */
+.skeleton {
+    background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
