@@ -28,7 +28,7 @@ class GitHubAuthHandler(tornado.web.RequestHandler):
             # Redirect to GitHub OAuth
             github_client_id = os.getenv("GITHUB_CLIENT_ID", "")
             # Use the callback URL from environment variable
-            redirect_uri = os.getenv("GITHUB_CALLBACK_URL", f"{self.request.protocol}://{self.request.host}/complete/github/")
+            redirect_uri = os.getenv("GITHUB_CALLBACK_URL", f"{self.request.protocol}://{self.request.host}/oauth/complete/github/")
             github_url = f"https://github.com/login/oauth/authorize?client_id={github_client_id}&redirect_uri={redirect_uri}&scope=user:email"
             self.redirect(github_url)
         else:
