@@ -1,7 +1,3 @@
-os
-json
-uuid
-datetime
 tornado
 requests
 psycopg2
