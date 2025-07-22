@@ -1,37 +1,43 @@
-# Python virtual environment
-venv/
-ENV/
-env/
-.venv/
-
 # Python bytecode
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
+*$py.class
 
-# Environment variables
+# Virtual environments
+venv/
+env/
+ENV/
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Local development settings
 .env
-.env.*
+.venv
 
-# OS files
+# Database files
+*.db
+*.sqlite3
+quickmeet.db
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS specific files
 .DS_Store
 Thumbs.db
 
-# VS Code settings
-.vscode/
-
-# Database files (if any local SQLite used)
-*.sqlite3
-*.db
-
-# Logs
+# Log files
 *.log
 
 # Coverage reports
 htmlcov/
 .coverage
+.coverage.*
 coverage.xml
-
-# Pytest cache
-.pytest_cache/
+coverage.json

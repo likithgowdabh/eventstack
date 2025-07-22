@@ -14,11 +14,11 @@ EventStack is a modern platform designed to make event planning and coordination
 
 ## Features
 
-### 🔐 Simple Authentication
+### Simple Authentication
 
 Get started quickly with GitHub authentication. No need to remember another password - just sign in with your GitHub account and you're ready to go.
 
-### 📅 Easy Event Creation
+### Easy Event Creation
 
 Create events in seconds:
 1. Give your event a title
@@ -26,28 +26,28 @@ Create events in seconds:
 3. Specify the location
 4. Propose multiple time slots
 
-### 🗳️ Democratic Time Selection
+### Democratic Time Selection
 
 No more back-and-forth emails or messages trying to find a time that works for everyone:
 - Participants vote on their preferred time slots
 - See votes update in real-time
 - Easily identify the most popular options
 
-### ⚡ Real-Time Updates
+### Real-Time Updates
 
 Experience seamless collaboration with instant updates:
 - See votes appear as they happen
 - No need to refresh the page
 - Always have the latest information
 
-### 💬 Event Discussion
+### Event Discussion
 
 Keep all event-related communication in one place:
 - Comment section for each event
 - Discuss details, ask questions, and share updates
 - Reduce the need for separate communication channels
 
-### 📱 Responsive Design
+### Responsive Design
 
 Access EventStack from any device:
 - Works on desktops, tablets, and mobile phones
