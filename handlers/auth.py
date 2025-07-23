@@ -96,7 +96,6 @@ class GitHubAuthHandler(tornado.web.RequestHandler):
                 self.redirect("/login?error=user_creation_failed")
         else:
             self.redirect("/login?error=user_info_failed")
-
 class LogoutHandler(tornado.web.RequestHandler):
     def get(self):
         self.clear_cookie("user")

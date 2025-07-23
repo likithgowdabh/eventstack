@@ -234,6 +234,7 @@ def get_comments_by_event(event_id):
     conn.close()
     return [dict(comment) for comment in comments]
 
+
 def finalize_event(event_id, slot_id):
     """Finalize an event with selected time slot"""
     conn = get_db_connection()
