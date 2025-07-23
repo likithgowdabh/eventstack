@@ -15,6 +15,7 @@
     <link rel="icon" type="image/png" href="/static/images/favicon.png" />
     <script>
       tailwind.config = {
+        darkMode: "class",
         theme: {
           extend: {
             colors: {
@@ -31,6 +32,10 @@
             },
           },
         },
+      };
+      tailwind.plugins = function ({ addVariant }) {
+        addVariant("placeholder", "&::placeholder");
+        addVariant("dark-placeholder", ".dark-mode &::placeholder");
       };
     </script>
   </head>
