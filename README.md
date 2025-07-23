@@ -108,6 +108,11 @@ You can run EventStack easily using Docker:
 
 ---
 
+# EventStack
+
+[![Contributors](https://contrib.rocks/image?repo=abhirajadhikary06/eventstack)](https://github.com/abhirajadhikary06/eventstack/graphs/contributors)
+
+
 ## Contributing
 
 We welcome contributions to make EventStack even better.  
