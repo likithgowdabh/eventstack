@@ -1,21 +1,44 @@
-.feature-icon { color: #111 !important; }
-.dark-mode .card .feature-icon { color: #111 !important; filter: none !important; }
+.feature-icon {
+  color: #111 !important;
+}
+
+.dark-mode .card .feature-icon {
+  color: #111 !important;
+  filter: none !important;
+}
+
 /* Force feature card icons to stay black in all modes (must be at end of file for specificity) */
-.feature-icon { color: #111 !important; }
-.dark-mode .card .feature-icon { color: #111 !important; filter: none !important; }
+.feature-icon {
+  color: #111 !important;
+}
+
+.dark-mode .card .feature-icon {
+  color: #111 !important;
+  filter: none !important;
+}
+
 /* Force feature card icons to stay black in all modes */
-.feature-icon { color: #111 !important; }
-.dark-mode .feature-icon { color: #111 !important; filter: none !important; }
+.feature-icon {
+  color: #111 !important;
+}
+
+.dark-mode .feature-icon {
+  color: #111 !important;
+  filter: none !important;
+}
+
 /* In dark mode, make only the white circles (logo/icon backgrounds) black, nothing else changes */
 .dark-mode .card .feature-icon {
   background: #18181b !important;
   background-color: #18181b !important;
 }
+
 /* (Removed icon/image color overrides for dark mode. Icons/images retain their original appearance.) */
 .dark-mode .bg-\[\#F9F6F1\] {
   background: transparent !important;
   background-color: transparent !important;
 }
+
 .dark-mode [style*="background-color: #fdfaf5"],
 .dark-mode [style*="background-color:#fdfaf5"],
 .dark-mode [style*="background: #fdfaf5"],
@@ -23,6 +46,7 @@
   background: transparent !important;
   background-color: transparent !important;
 }
+
 .dark-mode .card,
 .dark-mode .login-card,
 .dark-mode .login-container,
@@ -40,6 +64,7 @@
   background-color: #23272f !important;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4) !important;
 }
+
 .dark-mode [style*="color: rgb(17 24 39"],
 .dark-mode [style*="color:#111827"],
 .dark-mode [style*="color: #111827"],
@@ -66,6 +91,7 @@
   color: #f3f4f6 !important;
   -webkit-text-fill-color: #f3f4f6 !important;
 }
+
 .dark-mode .card *:not(.logo):not(.logo *),
 .dark-mode .activity-summary *,
 .dark-mode .card strong:not(.logo):not(.logo *),
@@ -97,6 +123,7 @@
 .dark-mode .activity-summary .text-gray-700 {
   color: #f3f4f6 !important;
 }
+
 /* Remove all background highlights in dark mode cards and activity summary */
 .dark-mode .card *,
 .dark-mode .card *::before,
@@ -108,6 +135,7 @@
   background-color: transparent !important;
   color: #f3f4f6 !important;
 }
+
 .dark-mode .card,
 .dark-mode .card *,
 .dark-mode .activity-summary,
@@ -129,6 +157,7 @@
 .dark-mode .card .number {
   color: #f3f4f6 !important;
 }
+
 .dark-mode h1,
 .dark-mode h2,
 .dark-mode h3,
@@ -136,9 +165,7 @@
 .dark-mode h5,
 .dark-mode h6,
 .dark-mode .card,
-.dark-mode
-  .card
-  *:not(.btn-github):not(.btn-github-green):not(.btn-github-blue),
+.dark-mode .card *:not(.btn-github):not(.btn-github-green):not(.btn-github-blue),
 .dark-mode p,
 .dark-mode label,
 .dark-mode .text,
@@ -172,66 +199,87 @@
 .dark-mode .text-gray-900 {
   color: #f3f4f6 !important;
 }
+
 .dark-mode .text-gray-800 {
   color: #e5e7eb !important;
 }
+
 .dark-mode .text-gray-600 {
   color: #cbd5e1 !important;
 }
+
 .dark-mode .text-gray-500 {
   color: #a1a1aa !important;
 }
+
 .dark-mode .text-gray-400 {
   color: #71717a !important;
 }
+
 .dark-mode .text-gray-300 {
   color: #52525b !important;
 }
+
 .dark-mode .text-gray-200 {
   color: #e5e7eb !important;
 }
+
 .dark-mode .text-gray-100 {
   color: #f3f4f6 !important;
 }
+
 .dark-mode .text-muted {
   color: #a1a1aa !important;
 }
+
 .dark-mode .text-secondary {
   color: #a1a1aa !important;
 }
+
 .dark-mode .text-primary {
   color: #f3f4f6 !important;
 }
+
 .dark-mode .text-white {
   color: #f3f4f6 !important;
 }
+
 .dark-mode .border-gray-200 {
   border-color: #23272f !important;
 }
+
 .dark-mode .border-gray-100 {
   border-color: #23272f !important;
 }
+
 .dark-mode .border-gray-300 {
   border-color: #33364a !important;
 }
+
 .dark-mode .border-gray-400 {
   border-color: #52525b !important;
 }
+
 .dark-mode .border-gray-500 {
   border-color: #71717a !important;
 }
+
 .dark-mode .border-gray-600 {
   border-color: #a1a1aa !important;
 }
+
 .dark-mode .border-gray-700 {
   border-color: #e5e7eb !important;
 }
+
 .dark-mode .border-gray-800 {
   border-color: #f3f4f6 !important;
 }
+
 .dark-mode .border-gray-900 {
   border-color: #f3f4f6 !important;
 }
+
 .dark-mode h1,
 .dark-mode h2,
 .dark-mode h3,
@@ -239,9 +287,7 @@
 .dark-mode h5,
 .dark-mode h6,
 .dark-mode .card,
-.dark-mode
-  .card
-  *:not(.btn-github):not(.btn-github-green):not(.btn-github-blue),
+.dark-mode .card *:not(.btn-github):not(.btn-github-green):not(.btn-github-blue),
 .dark-mode p,
 .dark-mode label,
 .dark-mode .text,
@@ -261,6 +307,7 @@
 .dark-mode .card .text-gray-500 {
   color: #cbd5e1 !important;
 }
+
 /* Custom styles for EventStack */
 
 /* Smooth transitions for interactive elements */
@@ -348,6 +395,7 @@
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -363,6 +411,7 @@
     transform: translateX(100%);
     opacity: 0;
   }
+
   to {
     transform: translateX(0);
     opacity: 1;
@@ -379,6 +428,7 @@
     transform: translateY(-100%);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -412,11 +462,11 @@
     align-items: stretch;
   }
 
-  .mobile-stack > * {
+  .mobile-stack>* {
     margin-bottom: 0.5rem;
   }
 
-  .mobile-stack > *:last-child {
+  .mobile-stack>*:last-child {
     margin-bottom: 0;
   }
 }
@@ -447,9 +497,11 @@ input[type="datetime-local"] {
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.1);
   }
+
   100% {
     transform: scale(1);
   }
@@ -509,6 +561,7 @@ input[type="datetime-local"] {
   0% {
     background-position: 200% 0;
   }
+
   100% {
     background-position: -200% 0;
   }
@@ -543,94 +596,116 @@ input[type="datetime-local"] {
   background-color: #1e293b !important;
   color: #f3f4f6 !important;
 }
+
 .dark-mode .btn-github-green {
   background-color: #15803d !important;
   color: #f3f4f6 !important;
 }
+
 .dark-mode .vote-btn {
   background-color: #334155 !important;
   color: #f3f4f6 !important;
 }
+
 .dark-mode .vote-btn:hover {
   background-color: #475569 !important;
 }
+
 .dark-mode .card {
   background-color: #23272f !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
 }
+
 .dark-mode .form-input,
 .dark-mode .form-textarea {
   background-color: #18181b !important;
   color: #f3f4f6 !important;
   border-color: #33364a !important;
 }
+
 .dark-mode .avatar-tooltip {
   background-color: #334155 !important;
   color: #f3f4f6 !important;
 }
+
 .dark-mode .notification {
   background-color: #23272f !important;
   color: #f3f4f6 !important;
 }
+
 .dark-mode .event-finalized {
   background: linear-gradient(135deg, #23272f 0%, #334155 100%) !important;
   border-color: #22d3ee !important;
 }
+
 .dark-mode .skeleton {
-  background: linear-gradient(
-    90deg,
-    #23272f 25%,
-    #334155 50%,
-    #23272f 75%
-  ) !important;
+  background: linear-gradient(90deg,
+      #23272f 25%,
+      #334155 50%,
+      #23272f 75%) !important;
 }
+
 .dark-mode .focus-visible:focus {
   outline: 2px solid #22d3ee !important;
 }
+
 .dark-mode .bg-gray-100 {
   background-color: #23272f !important;
   color: #f3f4f6 !important;
 }
+
 .dark-mode .bg-white {
   background-color: #18181b !important;
   color: #f3f4f6 !important;
 }
+
 .dark-mode .text-gray-700 {
   color: #e5e7eb !important;
 }
+
 .dark-mode .border-gray-300 {
   border-color: #33364a !important;
 }
+
 .dark-mode .border-white {
   border-color: #334155 !important;
 }
+
 .dark-mode .bg-green-100 {
   background-color: #14532d !important;
   color: #bbf7d0 !important;
 }
+
 .dark-mode .bg-yellow-100 {
   background-color: #78350f !important;
   color: #fde68a !important;
 }
+
 .dark-mode .bg-red-100 {
   background-color: #7f1d1d !important;
   color: #fecaca !important;
 }
+
 .dark-mode .text-green-800 {
   color: #bbf7d0 !important;
 }
+
 .dark-mode .text-yellow-800 {
   color: #fde68a !important;
 }
+
 .dark-mode .text-red-800 {
   color: #fecaca !important;
 }
+
 .dark-mode .border-green-200 {
   border-color: #22d3ee !important;
 }
+
 .dark-mode .border-yellow-200 {
   border-color: #fde68a !important;
 }
+
 .dark-mode .border-red-200 {
   border-color: #fecaca !important;
 }
