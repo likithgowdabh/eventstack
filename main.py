@@ -8,7 +8,7 @@ import tornado.websocket
 import sqlite3
 import json
 from handlers.auth import GitHubAuthHandler, LoginHandler, LogoutHandler
-from handlers.events import EventCreateHandler, EventViewHandler, EventVoteHandler, DashboardHandler
+from handlers.events import EventCreateHandler, EventViewHandler, EventVoteHandler, DashboardHandler, EventEditHandler
 from handlers.websocket import VoteWebSocketHandler
 from handlers.info import AboutHandler, PrivacyHandler, SupportHandler
 from models.db import init_db
@@ -40,6 +40,7 @@ def make_app():
         (r"/dashboard", DashboardHandler),
         (r"/create", EventCreateHandler),
         (r"/event/([^/]+)", EventViewHandler),
+        (r"/event/([^/]+)/edit", EventEditHandler),
         (r"/api/vote", EventVoteHandler),
         (r"/ws/vote/([^/]+)", VoteWebSocketHandler),
         (r"/about", AboutHandler),
