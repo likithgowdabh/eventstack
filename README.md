@@ -126,6 +126,12 @@ Before participating in our community, please review our [Code of Conduct](CODE_
 
 ---
 
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
 <p align="center">
   Made with ❤️ for better event planning
 </p>
