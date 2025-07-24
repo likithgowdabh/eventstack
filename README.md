@@ -81,6 +81,38 @@ Visit the platform at [EventStack Website](#) to create your first event.
 
 ---
 
+## Running with Docker
+
+You can run EventStack easily using Docker:
+
+1. **Build the Docker image:**
+   ```sh
+   docker compose build
+   ```
+
+2. **Start the application:**
+   ```sh
+   docker compose up
+   ```
+
+3. **Access the app:**
+   Open your browser and go to [http://localhost:5050](http://localhost:5050)
+
+4. **Stop the application:**
+   Press `Ctrl+C` in the terminal, then run:
+   ```sh
+   docker compose down
+   ```
+
+> Make sure you have [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed.
+
+---
+
+# EventStack
+
+[![Contributors](https://contrib.rocks/image?repo=abhirajadhikary06/eventstack)](https://github.com/abhirajadhikary06/eventstack/graphs/contributors)
+
+
 ## Contributing
 
 We welcome contributions to make EventStack even better.  
@@ -91,6 +123,12 @@ Please read our [Contributing Guidelines](CONTRIBUTING.md) before submitting a p
 ## Code of Conduct
 
 Before participating in our community, please review our [Code of Conduct](CODE_OF_CONDUCT.md).
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
 
 ---
 
