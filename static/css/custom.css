@@ -165,7 +165,9 @@
 .dark-mode h5,
 .dark-mode h6,
 .dark-mode .card,
-.dark-mode .card *:not(.btn-github):not(.btn-github-green):not(.btn-github-blue),
+.dark-mode
+  .card
+  *:not(.btn-github):not(.btn-github-green):not(.btn-github-blue),
 .dark-mode p,
 .dark-mode label,
 .dark-mode .text,
@@ -287,7 +289,9 @@
 .dark-mode h5,
 .dark-mode h6,
 .dark-mode .card,
-.dark-mode .card *:not(.btn-github):not(.btn-github-green):not(.btn-github-blue),
+.dark-mode
+  .card
+  *:not(.btn-github):not(.btn-github-green):not(.btn-github-blue),
 .dark-mode p,
 .dark-mode label,
 .dark-mode .text,
@@ -462,11 +466,11 @@
     align-items: stretch;
   }
 
-  .mobile-stack>* {
+  .mobile-stack > * {
     margin-bottom: 0.5rem;
   }
 
-  .mobile-stack>*:last-child {
+  .mobile-stack > *:last-child {
     margin-bottom: 0;
   }
 }
@@ -639,10 +643,12 @@ input[type="datetime-local"] {
 }
 
 .dark-mode .skeleton {
-  background: linear-gradient(90deg,
-      #23272f 25%,
-      #334155 50%,
-      #23272f 75%) !important;
+  background: linear-gradient(
+    90deg,
+    #23272f 25%,
+    #334155 50%,
+    #23272f 75%
+  ) !important;
 }
 
 .dark-mode .focus-visible:focus {
@@ -708,4 +714,8 @@ input[type="datetime-local"] {
 
 .dark-mode .border-red-200 {
   border-color: #fecaca !important;
+}
+/* Ensure username remains visible when hovered in dark mode */
+.dark-mode .group:hover .username-span {
+  color: #111 !important;
 }
