@@ -55,7 +55,7 @@
                     <div class="flex items-center justify-between">
                         <div class="animate-fade-in">
                             <h1 class="text-4xl font-bold mb-2">
-                                Welcome back, John Doe 👋
+                                Welcome back, {{ user['username'] }} 👋
                             </h1>
                             <p class="text-white/90 text-lg">Manage your events and participation with ease.</p>
                         </div>
@@ -102,7 +102,7 @@
                     <div class="w-16 h-16 bg-gradient-to-r from-eventstack-orange to-eventstack-orange-dark rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-calendar-plus text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-3xl font-bold text-eventstack-orange mb-2">5</h3>
+                    <h3 class="text-3xl font-bold text-eventstack-orange mb-2">{{ len(created_events) }}</h3>
                     <p class="text-gray-600 font-medium">Events Created</p>
                     <p class="text-sm text-gray-400 mt-1">Total events organized</p>
                 </div>
@@ -110,7 +110,7 @@
                     <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-users text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-3xl font-bold text-blue-500 mb-2">12</h3>
+                    <h3 class="text-3xl font-bold text-blue-500 mb-2">{{ len(participated_events) }}</h3>
                     <p class="text-gray-600 font-medium">Events Joined</p>
                     <p class="text-sm text-gray-400 mt-1">Total participations</p>
                 </div>
@@ -118,7 +118,7 @@
                     <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-bolt text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-3xl font-bold text-green-500 mb-2">3</h3>
+                    <h3 class="text-3xl font-bold text-green-500 mb-2">{{ sum(1 for e in created_events if not e['is_finalized']) + sum(1 for e in participated_events if not e['is_finalized']) }}</h3>
                     <p class="text-gray-600 font-medium">Active Events</p>
                     <p class="text-sm text-gray-400 mt-1">Currently running</p>
                 </div>
@@ -135,36 +135,37 @@
                             <h2 class="text-2xl font-semibold text-gray-800">Events You Created</h2>
                         </div>
                         <span class="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
-                            5 events
+                            {{ len(created_events) }} events
                         </span>
                     </div>
                 </div>
                 
                 <div class="p-6">
                     <div class="space-y-4">
+                        {% for event in created_events %}
                         <div class="event-card p-6 border border-gray-200 rounded-lg hover:shadow-md hover:border-eventstack-orange transition-all duration-200 group">
                             <div class="flex justify-between items-start">
                                 <div class="flex-1">
                                     <div class="flex items-center mb-2">
                                         <h3 class="text-xl font-bold text-gray-800 group-hover:text-eventstack-orange transition-colors">
-                                            Team Planning Meeting 2025
+                                            {{ event['title'] }}
                                         </h3>
-                                        <span class="ml-3 text-xs px-2 py-1 rounded-full bg-green-100 text-green-700">
-                                            Active
+                                        <span class="ml-3 text-xs px-2 py-1 rounded-full {% if event['is_finalized'] %}bg-gray-100 text-gray-600{% else %}bg-green-100 text-green-700{% end %}">
+                                            {% if event['is_finalized'] %}Finalized{% else %}Active{% end %}
                                         </span>
 
                                     </div>
                                     <p class="text-gray-600 mb-3 leading-relaxed">
-                                        Planning our roadmap for 2025 with all team members. We'll discuss goals, milestones, and resource allocation for the upcoming year.
+                                        {{ event['description'] }}
                                     </p>
                                     <div class="flex items-center space-x-4 text-sm text-gray-500">
                                         <span class="flex items-center">
                                             <i class="fas fa-clock mr-1"></i>
-                                            Created recently
+                                            Created {{ event['created_at'] }}
                                         </span>
                                         <span class="flex items-center">
                                             <i class="fas fa-eye mr-1"></i>
-                                            15 views
+                                            Views
                                         </span>
 
                                         {% if event['location'] and event['location'].strip() %}
@@ -222,9 +223,9 @@
                                     </div>
                                 </div>
                                 <div class="ml-6 flex flex-col items-end space-y-3">
-                                    <button class="text-eventstack-orange hover:text-eventstack-orange-dark transition-colors p-2 hover:bg-orange-50 rounded-lg" title="View event details">
+                                    <a href="/event/{{ event['id'] }}" class="text-eventstack-orange hover:text-eventstack-orange-dark transition-colors p-2 hover:bg-orange-50 rounded-lg" title="View event details">
                                         <i class="fas fa-arrow-right text-lg"></i>
-                                    </button>
+                                    </a>
                                     <div class="flex space-x-2">
                                         <button class="text-gray-400 hover:text-blue-500 transition-colors p-1" title="Edit event">
                                             <i class="fas fa-edit"></i>
@@ -236,47 +237,7 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="event-card p-6 border border-gray-200 rounded-lg hover:shadow-md hover:border-eventstack-orange transition-all duration-200 group">
-                            <div class="flex justify-between items-start">
-                                <div class="flex-1">
-                                    <div class="flex items-center mb-2">
-                                        <h3 class="text-xl font-bold text-gray-800 group-hover:text-eventstack-orange transition-colors">
-                                            Product Launch Event
-                                        </h3>
-                                        <span class="ml-3 text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-600">
-                                            Finalized
-                                        </span>
-                                    </div>
-                                    <p class="text-gray-600 mb-3 leading-relaxed">
-                                        Big reveal of our newest product features and improvements. Join us for an exciting showcase of innovation and technology.
-                                    </p>
-                                    <div class="flex items-center space-x-4 text-sm text-gray-500">
-                                        <span class="flex items-center">
-                                            <i class="fas fa-clock mr-1"></i>
-                                            Created 2 days ago
-                                        </span>
-                                        <span class="flex items-center">
-                                            <i class="fas fa-eye mr-1"></i>
-                                            42 views
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="ml-6 flex flex-col items-end space-y-3">
-                                    <button class="text-eventstack-orange hover:text-eventstack-orange-dark transition-colors p-2 hover:bg-orange-50 rounded-lg" title="View event details">
-                                        <i class="fas fa-arrow-right text-lg"></i>
-                                    </button>
-                                    <div class="flex space-x-2">
-                                        <button class="text-gray-400 hover:text-blue-500 transition-colors p-1" title="Edit event">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="text-gray-400 hover:text-red-500 transition-colors p-1" title="Delete event">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {% end %}
                     </div>
                 </div>
             </div>
@@ -292,45 +253,47 @@
                             <h2 class="text-2xl font-semibold text-gray-800">Events You Joined</h2>
                         </div>
                         <span class="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
-                            12 events
+                            {{ len(participated_events) }} events
                         </span>
                     </div>
                 </div>
                 
                 <div class="p-6">
                     <div class="space-y-4">
+                        {% for event in participated_events %}
                         <div class="event-card p-6 border border-gray-200 rounded-lg hover:shadow-md hover:border-blue-500 transition-all duration-200 group">
                             <div class="flex justify-between items-start">
                                 <div class="flex-1">
                                     <div class="flex items-center mb-2">
                                         <h3 class="text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors">
-                                            Design Workshop 2025
+                                            {{ event['title'] }}
                                         </h3>
-                                        <span class="ml-3 text-xs px-2 py-1 rounded-full bg-green-100 text-green-700">
-                                            Active
+                                        <span class="ml-3 text-xs px-2 py-1 rounded-full {% if event['is_finalized'] %}bg-gray-100 text-gray-600{% else %}bg-green-100 text-green-700{% end %}">
+                                            {% if event['is_finalized'] %}Finalized{% else %}Active{% end %}
                                         </span>
                                     </div>
                                     <p class="text-gray-600 mb-3 leading-relaxed">
-                                        Interactive workshop focusing on modern design principles and user experience best practices for digital products.
+                                        {{ event['description'] }}
                                     </p>
                                     <div class="flex items-center space-x-4 text-sm text-gray-500">
                                         <span class="flex items-center">
                                             <i class="fas fa-user mr-1"></i>
-                                            by Alice Smith
+                                            by {{ event['creator_username'] }}
                                         </span>
                                         <span class="flex items-center">
                                             <i class="fas fa-calendar mr-1"></i>
-                                            Joined recently
+                                            Joined
                                         </span>
                                     </div>
                                 </div>
                                 <div class="ml-6">
-                                    <button class="text-blue-500 hover:text-blue-700 transition-colors p-2 hover:bg-blue-50 rounded-lg" title="View event">
+                                    <a href="/event/{{ event['id'] }}" class="text-blue-500 hover:text-blue-700 transition-colors p-2 hover:bg-blue-50 rounded-lg" title="View event">
                                         <i class="fas fa-arrow-right text-lg"></i>
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
+                        {% end %}
                     </div>
                 </div>
             </div>
