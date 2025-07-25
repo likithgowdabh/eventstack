@@ -54,13 +54,47 @@
           </div>
           <div class="flex items-center space-x-4">
             {% if user %}
+            <!-- 🔔 Notification bell -->
+            <div class="relative">
+              <button id="notificationButton" class="relative p-2 text-gray-400 hover:text-eventstack-orange focus:outline-none">
+                <i class="fas fa-bell text-xl"></i>
+                {% if upcoming_events and upcoming_events|length > 0 %}
+                  <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
+                    {{ upcoming_events|length }}
+                  </span>
+                {% endif %}
+              </button>
+              <div
+                id="notificationDropdown"
+                class="absolute right-0 mt-2 w-72 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg shadow-lg z-50 hidden">
+                <div class="p-3 border-b border-gray-200 dark:border-gray-700 font-medium">
+                  Upcoming Events
+                </div>
+                <ul class="max-h-60 overflow-y-auto">
+                  {% if upcoming_events %}
+                    {% for event in upcoming_events %}
+                    <li class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                      <div class="text-sm font-semibold text-eventstack-orange">
+                        {{ event.title }}
+                      </div>
+                      <div class="text-xs text-gray-500 dark:text-gray-400">
+                        {{ event.start_time.strftime('%b %d, %Y %I:%M %p') }}
+                      </div>
+                    </li>
+                    {% endfor %}
+                  {% else %}
+                    <li class="px-4 py-2 text-sm text-gray-500">No upcoming events</li>
+                  {% endif %}
+                </ul>
+              </div>
+            </div>
+
             <a
               href="/create"
               class="bg-gray-900 text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-800 transition duration-200">
               <i class="fas fa-plus mr-2"></i>New Event
             </a>
             <div class="flex items-center space-x-3">
-              <!-- Username and avatar with hover -->
               <a
                 href="/dashboard"
                 class="group flex items-center space-x-2 hover:bg-gray-100 dark:hover:bg-black px-3 py-2 rounded-lg transition duration-200">
@@ -73,7 +107,6 @@
                   {{ user['username'] }}
                 </span>
               </a>
-              <!-- Logout icon with tooltip To right  -->
               <div class="relative group">
                 <a
                   href="/logout"
@@ -97,10 +130,12 @@
         </div>
       </div>
     </nav>
+
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {% block content %}{% end %}
     </main>
+
     <!-- Footer -->
     <footer
       class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-auto">
@@ -139,7 +174,21 @@
         </div>
       </div>
     </footer>
+
+    <script>
+      document.getElementById("notificationButton")?.addEventListener("click", function (e) {
+        e.stopPropagation();
+        const dropdown = document.getElementById("notificationDropdown");
+        dropdown?.classList.toggle("hidden");
+      });
+
+      document.addEventListener("click", function () {
+        document.getElementById("notificationDropdown")?.classList.add("hidden");
+      });
+    </script>
+
     <script src="/static/js/app.js"></script>
     {% block scripts %}{% end %}
   </body>
 </html>
+
